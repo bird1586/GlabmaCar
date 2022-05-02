@@ -66,3 +66,6 @@ if uploaded_file is not None:
          file_name='df.xlsx',
          mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
          )
+    
+    st.write('preview')
+    st.dataframe(df)
