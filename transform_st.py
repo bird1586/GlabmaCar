@@ -69,3 +69,11 @@ if uploaded_file is not None:
     
     st.write('preview')
     st.dataframe(df)
+    
+hide_streamlit_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
