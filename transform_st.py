@@ -10,7 +10,7 @@ import streamlit as st
 
 @st.cache
 def convert_df(df):
-    return df.to_excel().encode('utf-8')
+    return df.to_excel('df.xlsx', index=False)
 
 uploaded_file = st.file_uploader("請上傳EXCEL", type="xlsx")
 if uploaded_file is not None:
@@ -33,7 +33,7 @@ if uploaded_file is not None:
 
     st.download_button(
          label="Download data as excel",
-         data=excel,
+         data=open("df.xlsx", "rb"),
          file_name='df.xlsx',
          mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
          )
