@@ -16,7 +16,7 @@ uploaded_file = st.file_uploader("請上傳EXCEL", type="xlsx")
 if uploaded_file is not None:
     st.write("upload filename:", uploaded_file.name)
 
-    df = pd.read_excel(uploaded_file.getvalue())
+    df = pd.read_excel(uploaded_file)
     df[list(range(15))] = ''
     df[['用車時間_date', '用車時間_time']] = df['用车时间'].str.split(' ', expand = True)
     
