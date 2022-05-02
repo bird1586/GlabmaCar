@@ -12,9 +12,8 @@ import streamlit as st
 def convert_df(df):
     return df.to_excel('df.xlsx', index=False)
 
-uploaded_file = st.file_uploader("請上傳EXCEL", type="xlsx")
+uploaded_file = st.file_uploader("請上傳EXCEL", type=["xlsx", 'xls'])
 if uploaded_file is not None:
-    st.write("upload filename:", uploaded_file.name)
 
     df = pd.read_excel(uploaded_file)
     df[list(range(15))] = ''
