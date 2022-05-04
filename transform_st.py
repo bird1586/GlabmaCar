@@ -7,6 +7,7 @@ Created on Mon May  2 16:51:30 2022
 
 import pandas as pd
 import streamlit as st
+import io
 
 @st.cache
 def convert_df(df):
@@ -17,6 +18,13 @@ def expand_columns(df, goal_columns):
     if diff > 0:
         df[list(range(diff))] = ''
     return df
+
+def df_to_Byte(df):
+    output = io.BytesIO()
+    writer = pd.ExcelWriter(output, engine='xlsxwriter')
+    df.to_excel(writer)
+    writer.save()
+    return output.getvalue()
 
 uploaded_file = st.file_uploader("請上傳EXCEL", type=["xlsx", 'xls'])
 if uploaded_file is not None:
@@ -58,11 +66,9 @@ if uploaded_file is not None:
                  "23", "24", "25", "下单时间", "订单币种", "订单状态", "司机ID", 
                  "司机名称", "服务类型", "城市"]]
 
-
-    excel = convert_df(df)
     st.download_button(
          label="Download data as excel",
-         data=open("df.xlsx", "rb"),
+         data=df_to_Byte(df),
          file_name='df.xlsx',
          mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
          )
