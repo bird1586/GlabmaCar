@@ -22,7 +22,7 @@ def expand_columns(df, goal_columns):
 def df_to_Byte(df):
     output = io.BytesIO()
     writer = pd.ExcelWriter(output, engine='xlsxwriter')
-    df.to_excel(writer)
+    df.to_excel(writer, index=False)
     writer.save()
     return output.getvalue()
 
